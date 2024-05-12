@@ -1,0 +1,115 @@
+\documentclass[a4paper,zihao=-4,UTF8]{ctexart}
+\pagestyle{plain}
+\date{}
+\usepackage[top=1.0in, bottom=1.0in, left=1.25in, right=1.25in]{geometry} 
+\setlength{\baselineskip}{20pt}
+\usepackage{titlesec}
+\usepackage{zhnumber}
+\usepackage{abstract}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{color}   % May be necessary if you want to color links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{amsmath,amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% numbering restarts at each section
+\numberwithin{figure}{section}  
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+\numberwithin{algorithm}{section}
+
+\usepackage{xcolor,colortbl}
+\usepackage[capitalize]{cleveref}  % Support for easy cross-referencing
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+\crefname{equation}{公式}{公式}
+\crefname{algorithm}{算法}{算法}
+
+
+% set font for English
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setromanfont{Times New Roman}
+% the following two are to support combined Chinese and English
+\newcommand{\hei}[1]{\heiti\sffamily #1}
+\newcommand{\song}[1]{\songti\rmfamily #1}
+
+
+% setup style for table of contents
+\usepackage{titlesec}
+\usepackage{titletoc}
+\titlecontents{section}[0em]
+  {\zihao{-4}\bfseries\heiti}
+  {\contentspush{第\zhnumber{\thecontentslabel}章\quad}}
+  {\hspace{0em}}
+  {\titlerule*[2pt]{$.$}\contentspage}
+\titlecontents{subsection}[2em]{\zihao{-4}}{\contentslabel{2em}}{\hspace{-2em}}{\titlerule*[0.2pc]{$.$}\contentspage}
+\titlecontents{subsubsection}[4em]{\zihao{-4}}{\contentslabel{3em}}{\hspace{-3em}}{\titlerule*[0.2pc]{$.$}\contentspage}
+\titlecontents{title}{\centering\zihao{2}\heiti 目录}
+
+% update references to Chinese style, font size and type can also be set here
+\usepackage{caption}
+\titleformat{\section}{\centering\hei\zihao{-2}}{第\chinese{section}章}{1em}{}[]
+\titleformat{\subsection}{\hei\zihao{-3}}{\arabic{section}.\arabic{subsection}}{1em}{}[]
+\titleformat{\subsubsection}{\hei\zihao{4}}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{1em}{}[]
+\renewcommand{\abstractnamefont}{\hei\zihao{-2}}
+\renewcommand{\abstracttextfont}{}
+% \renewenvironment{abstract}{\begin{center}{\hei\zihao{-2}摘~要}\end{center}\par} \\
+% \newenvironment{abstract-en}{\begin{center}{\hei\zihao{-2}Abstract}\end{center}\par}
+
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\renewcommand{\thefigure} {\arabic{section}-\arabic{figure}}
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\renewcommand{\thetable} {\arabic{section}-\arabic{table}}
+\captionsetup{labelsep=space} 
+
+
+% title text
+\newcommand{\mytitle}{番茄炒蛋}
+
+% header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{\song{\zihao{-5}\mytitle}}
+\fancyhead[R]{\song{\zihao{-5}\leftmark}}
+\renewcommand\headrulewidth{.5pt}
+\renewcommand\footrulewidth{0pt}
+
+% for hype-reference of "section*" to work properly
+\usepackage{xparse}
+\let\oldsection\section
+\makeatletter
+\newcounter{@secnumdepth}
+\RenewDocumentCommand{\section}{s o m}{%
+  \IfBooleanTF{#1}
+    {\setcounter{@secnumdepth}{\value{secnumdepth}}% Store secnumdepth
+     \setcounter{secnumdepth}{0}% Print only up to \chapter numbers
+     \oldsection{#3}% \section*
+     \setcounter{secnumdepth}{\value{@secnumdepth}}}% Restore secnumdepth
+    {\IfValueTF{#2}% \section
+       {\oldsection[#2]{#3}}% \section[.]{..}
+       {\oldsection{#3}}}% \section{..}
+}
+\makeatother
+
+\makeatletter
+\renewcommand{\ALG@name}{算法}
+\renewcommand\thealgorithm{\arabic{section}-\arabic{algorithm}} 
+\makeatother
+
+% use GB/T 7714—2015 BibTeX Style
+\usepackage{gbt7714}
+\bibliographystyle{gbt7714-numerical}
