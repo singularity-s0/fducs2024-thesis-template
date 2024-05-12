@@ -23,9 +23,12 @@
 
 % Prevent the ToC from including itself
 \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+\let\oldleftmark\leftmark
+\renewcommand{\leftmark}{目录}
 \tableofcontents
 \addtocontents{toc}{\protect\setcounter{tocdepth}{3}}
 \clearpage
+\renewcommand{\leftmark}{\oldleftmark}
 
 
 \pagenumbering{arabic}
