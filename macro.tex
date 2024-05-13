@@ -56,9 +56,20 @@
   {\contentspush{第\zhnumber{\thecontentslabel}章\quad}}
   {\hspace{0em}}
   {\titlerule*[2pt]{$.$}\contentspage}
-\titlecontents{subsection}[2em]{\zihao{-4}}{\contentslabel{2em}}{\hspace{-2em}}{\titlerule*[0.2pc]{$.$}\contentspage}
-\titlecontents{subsubsection}[4em]{\zihao{-4}}{\contentslabel{3em}}{\hspace{-3em}}{\titlerule*[0.2pc]{$.$}\contentspage}
-\titlecontents{title}{\centering\zihao{2}\heiti 目录}
+\titlecontents{subsection}[2em]
+  {\zihao{-4}}{\contentslabel{2em}}
+  {\hspace{-2em}}
+  {\titlerule*[0.2pc]{$.$}\contentspage}
+\titlecontents{subsubsection}[4em]
+  {\zihao{-4}}
+  {\contentslabel{3em}}
+  {\hspace{-3em}}
+  {\titlerule*[0.2pc]{$.$}\contentspage}
+\titlecontents{title}[0em]
+  {\centering\zihao{2}\heiti}
+  {\contentspush{目录}}
+  {\hspace{0em}}
+  {\titlerule*[2pt]{$.$}\contentspage}
 
 % update references to Chinese style, font size and type can also be set here
 \usepackage{caption}
@@ -84,6 +95,18 @@
 % header
 \usepackage{fancyhdr}
 \pagestyle{fancy}
+
+\makeatletter
+\newcommand{\ifsectionstar}[2]{%
+	\ifnum\value{@instarsection}=0
+		{#1}
+	\else
+		{#2}
+	\fi
+}
+\makeatother
+
+\renewcommand{\sectionmark}[1]{\markboth{\ifsectionstar{第\chinese{section}章~}{}#1}{}}
 \fancyhead[L]{\song{\zihao{-5}\mytitle}}
 \fancyhead[R]{\song{\zihao{-5}\leftmark}}
 \renewcommand\headrulewidth{.5pt}
@@ -94,15 +117,19 @@
 \let\oldsection\section
 \makeatletter
 \newcounter{@secnumdepth}
+\newcounter{@instarsection}
 \RenewDocumentCommand{\section}{s o m}{%
   \IfBooleanTF{#1}
     {\setcounter{@secnumdepth}{\value{secnumdepth}}% Store secnumdepth
      \setcounter{secnumdepth}{0}% Print only up to \chapter numbers
+     \setcounter{@instarsection}{1}
      \oldsection{#3}% \section*
      \setcounter{secnumdepth}{\value{@secnumdepth}}}% Restore secnumdepth
-    {\IfValueTF{#2}% \section
+    {\setcounter{@instarsection}{0}
+     \IfValueTF{#2}% \section
        {\oldsection[#2]{#3}}% \section[.]{..}
-       {\oldsection{#3}}}% \section{..}
+       {\oldsection{#3}} % \section{..}
+    }
 }
 \makeatother
 
