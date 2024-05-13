@@ -14,7 +14,8 @@
     colorlinks=true, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
     linkcolor=black,  %choose some color if you want links to stand out
-    urlcolor=black
+    urlcolor=black,
+    citecolor=black
 }
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -97,16 +98,17 @@
 \pagestyle{fancy}
 
 \makeatletter
-\newcommand{\ifsectionstar}[2]{%
+\newcommand{\if@sectionstar}[2]{ % are we in a \section* or \section?
 	\ifnum\value{@instarsection}=0
 		{#1}
 	\else
 		{#2}
 	\fi
 }
-\makeatother
 
-\renewcommand{\sectionmark}[1]{\markboth{\ifsectionstar{第\chinese{section}章~}{}#1}{}}
+
+\renewcommand{\sectionmark}[1]{\markboth{\if@sectionstar{第\chinese{section}章~}{}#1}{}}
+\makeatother
 \fancyhead[L]{\song{\zihao{-5}\mytitle}}
 \fancyhead[R]{\song{\zihao{-5}\leftmark}}
 \renewcommand\headrulewidth{.5pt}
@@ -122,10 +124,10 @@
   \IfBooleanTF{#1}
     {\setcounter{@secnumdepth}{\value{secnumdepth}}% Store secnumdepth
      \setcounter{secnumdepth}{0}% Print only up to \chapter numbers
-     \setcounter{@instarsection}{1}
+     \setcounter{@instarsection}{1} % mark that we are in a \section*. See \if@sectionstar.
      \oldsection{#3}% \section*
      \setcounter{secnumdepth}{\value{@secnumdepth}}}% Restore secnumdepth
-    {\setcounter{@instarsection}{0}
+    {\setcounter{@instarsection}{0} % mark that we are in a \section
      \IfValueTF{#2}% \section
        {\oldsection[#2]{#3}}% \section[.]{..}
        {\oldsection{#3}} % \section{..}
@@ -141,3 +143,4 @@
 % use GB/T 7714—2015 BibTeX Style
 \usepackage{gbt7714}
 \bibliographystyle{gbt7714-numerical}
+\citestyle{numbers} % use number "[1]" instead of super "^{[1]}"
