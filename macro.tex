@@ -137,9 +137,14 @@
 \bibliographystyle{gbt7714-numerical}
 \citestyle{numbers} % use number "[1]" instead of super "^{[1]}"
 
-\let\oldthebibliography\thebibliography
-\renewcommand\thebibliography[1]{%
-  \oldthebibliography{#1}%
-  \setlength{\parskip}{0pt}%
-  \setlength{\itemsep}{0pt}%
+% set the separate spacing for lists like enum, item
+\setlist{
+  noitemsep,
+  topsep=0pt,
+  parsep=0pt,
+  partopsep=0pt,
+  leftmargin=*
 }
+
+%set the separate spacing for bibs
+\setlength{\bibsep}{0pt}
