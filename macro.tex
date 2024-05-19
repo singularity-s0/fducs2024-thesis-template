@@ -136,3 +136,10 @@
 \usepackage{gbt7714}
 \bibliographystyle{gbt7714-numerical}
 \citestyle{numbers} % use number "[1]" instead of super "^{[1]}"
+
+\let\oldthebibliography\thebibliography
+\renewcommand\thebibliography[1]{%
+  \oldthebibliography{#1}%
+  \setlength{\parskip}{0pt}%
+  \setlength{\itemsep}{0pt}%
+}
