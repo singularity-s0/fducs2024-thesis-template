@@ -52,6 +52,8 @@
 % setup style for table of contents
 \usepackage{titlesec}
 \usepackage{titletoc}
+\renewcommand{\contentsname}{\zihao{2} \heiti 目录}
+\addtocontents{toc}{\vspace{\baselineskip}}
 \titlecontents{section}[0em]
   {\zihao{-4}\bfseries\heiti}
   {\contentspush{第\zhnumber{\thecontentslabel}章\quad}}
@@ -66,17 +68,17 @@
   {\contentslabel{3em}}
   {\hspace{-3em}}
   {\titlerule*[0.2pc]{$.$}\contentspage}
-\titlecontents{title}[0em]
-  {\centering\zihao{2}\heiti}
-  {\contentspush{目录}}
-  {\hspace{0em}}
-  {\titlerule*[2pt]{$.$}\contentspage}
+% \titlecontents{title}[0em]
+%   {\centering\zihao{2}\heiti}
+%   {\contentspush{目录}}
+%   {\hspace{0em}}
+%   {\titlerule*[2pt]{$.$}\contentspage}
 
 % update references to Chinese style, font size and type can also be set here
 \usepackage{caption}
 \titleformat{\section}{\centering\hei\zihao{-2}}{第\chinese{section}章}{1em}{}[]
-\titleformat{\subsection}{\hei\zihao{-3}}{\arabic{section}.\arabic{subsection}}{1em}{}[]
-\titleformat{\subsubsection}{\hei\zihao{4}}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{1em}{}[]
+\titleformat{\subsection}{\song\zihao{3}\bfseries}{\arabic{section}.\arabic{subsection}}{1em}{}[]
+\titleformat{\subsubsection}{\song\zihao{-3}\bfseries}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{1em}{}[]
 \renewcommand{\abstractnamefont}{\hei\zihao{-2}}
 \renewcommand{\abstracttextfont}{}
 % \renewenvironment{abstract}{\begin{center}{\hei\zihao{-2}摘~要}\end{center}\par} \\
