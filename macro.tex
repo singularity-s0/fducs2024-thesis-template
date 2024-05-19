@@ -136,3 +136,15 @@
 \usepackage{gbt7714}
 \bibliographystyle{gbt7714-numerical}
 \citestyle{numbers} % use number "[1]" instead of super "^{[1]}"
+
+% set the separate spacing for lists like enum, item
+\setlist{
+  noitemsep,
+  topsep=0pt,
+  parsep=0pt,
+  partopsep=0pt,
+  leftmargin=*
+}
+
+%set the separate spacing for bibs
+\setlength{\bibsep}{0pt}
