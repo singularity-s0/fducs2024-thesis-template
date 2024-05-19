@@ -1,8 +1,8 @@
 \documentclass[a4paper,zihao=-4,UTF8]{ctexart}
 \pagestyle{plain}
 \date{}
-\usepackage[top=1.0in, bottom=1.0in, left=1.25in, right=1.25in]{geometry} 
-\setlength{\baselineskip}{20pt}
+\usepackage[top=1.0in, bottom=1.0in, left=1.25in, right=1.25in]{geometry}
+\usepackage[bodytextleadingratio=1.67]{zhlineskip}
 \usepackage{titlesec}
 \usepackage{zhnumber}
 \usepackage{abstract}
@@ -39,11 +39,6 @@
 \crefname{algorithm}{算法}{算法}
 
 
-% set font for English
-\usepackage{fontspec}
-\setmainfont{Times New Roman}
-\setsansfont{Arial}
-\setromanfont{Times New Roman}
 % the following two are to support combined Chinese and English
 \newcommand{\hei}[1]{\heiti\sffamily #1}
 \newcommand{\song}[1]{\songti\rmfamily #1}
@@ -68,11 +63,6 @@
   {\contentslabel{3em}}
   {\hspace{-3em}}
   {\titlerule*[0.2pc]{$.$}\contentspage}
-% \titlecontents{title}[0em]
-%   {\centering\zihao{2}\heiti}
-%   {\contentspush{目录}}
-%   {\hspace{0em}}
-%   {\titlerule*[2pt]{$.$}\contentspage}
 
 % update references to Chinese style, font size and type can also be set here
 \usepackage{caption}
