@@ -1,29 +1,31 @@
 \documentclass[a4paper,zihao=-4,UTF8]{ctexart}
 \pagestyle{plain}
 \date{}
-\usepackage[top=1.0in, bottom=1.0in, left=1.25in, right=1.25in]{geometry}
-\usepackage[bodytextleadingratio=1.67]{zhlineskip}
-\usepackage{titlesec}
-\usepackage{zhnumber}
-\usepackage{abstract}
-\usepackage{indentfirst}
-\setlength{\parindent}{2em}
-\usepackage{color}   % May be necessary if you want to color links
-\usepackage{hyperref}
+\usepackage[top=1.0in, bottom=1.0in, left=1.25in, right=1.25in]{geometry} % set margins for A4 paper
+\usepackage[bodytextleadingratio=1.67]{zhlineskip} % use line skip optimized for Chinese text
+\usepackage{zhnumber} % for converting number to Chinese numbering
+\usepackage{abstract} % for abstract
+
+\usepackage{indentfirst} % for indenting the first paragraph of each section
+\setlength{\parindent}{2em} % set indent for each paragraph
+
+\usepackage{graphicx} % for including images
+
+\usepackage{hyperref} % for setting hyper-ref styles
 \hypersetup{
-    colorlinks=true, %set true if you want colored links
-    linktoc=all,     %set to all if you want both sections and subsections linked
-    linkcolor=black,  %choose some color if you want links to stand out
+    colorlinks=true, % set true if you want colored links
+    linktoc=all,     % set to all if you want both sections and subsections linked
+    linkcolor=black,  % we want all links to be black
     urlcolor=black,
     citecolor=black
 }
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{graphicx}
-\usepackage{enumitem}
-\usepackage{amsmath,amssymb}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
+
+\usepackage{booktabs} % for better table rules
+\usepackage{multirow} % for multirow cells in tables
+\usepackage{enumitem} % for better control of itemize and enumerate
+\usepackage{amsmath,amssymb} % for mathematical symbols
+\usepackage{algorithm} % for algorithm environment
+\usepackage{algpseudocode} % for algorithm pseudocodes
 
 % numbering restarts at each section
 \numberwithin{figure}{section}  
@@ -31,22 +33,22 @@
 \numberwithin{equation}{section}
 \numberwithin{algorithm}{section}
 
-\usepackage{xcolor,colortbl}
-\usepackage[capitalize]{cleveref}  % Support for easy cross-referencing
+\usepackage{xcolor,colortbl} % for colorful tables and better color mixing
+\usepackage[capitalize]{cleveref}  % for setting cross-referencing names
 \crefname{figure}{图}{图}
 \crefname{table}{表}{表}
 \crefname{equation}{公式}{公式}
 \crefname{algorithm}{算法}{算法}
 
 
-% the following two are to support combined Chinese and English
+% convenient commands for changing font
 \newcommand{\hei}[1]{\heiti\sffamily #1}
 \newcommand{\song}[1]{\songti\rmfamily #1}
 
 
-% setup style for table of contents
-\usepackage{titlesec}
-\usepackage{titletoc}
+% set up style for table of contents
+\usepackage{titlesec} % for setting styles of section titles
+\usepackage{titletoc} % for setting styles of TOC
 \renewcommand{\contentsname}{\zihao{2} \heiti 目录}
 \addtocontents{toc}{\vspace{\baselineskip}}
 \titlecontents{section}[0em]
@@ -65,21 +67,23 @@
   {\titlerule*[0.2pc]{$.$}\contentspage}
 
 % update references to Chinese style, font size and type can also be set here
-\usepackage{caption}
+\usepackage{caption} % for tuning caption styles
 \titleformat{\section}{\centering\hei\zihao{-2}}{第\chinese{section}章}{1em}{}[]
 \titleformat{\subsection}{\song\zihao{3}\bfseries}{\arabic{section}.\arabic{subsection}}{1em}{}[]
 \titleformat{\subsubsection}{\song\zihao{-3}\bfseries}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{1em}{}[]
 \renewcommand{\abstractnamefont}{\hei\zihao{-2}}
 \renewcommand{\abstracttextfont}{}
-% \renewenvironment{abstract}{\begin{center}{\hei\zihao{-2}摘~要}\end{center}\par} \\
-% \newenvironment{abstract-en}{\begin{center}{\hei\zihao{-2}Abstract}\end{center}\par}
 
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
-\renewcommand{\thefigure} {\arabic{section}-\arabic{figure}}
+\renewcommand{\thefigure}{\arabic{section}-\arabic{figure}}
 \renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
-\renewcommand{\thetable} {\arabic{section}-\arabic{table}}
-\captionsetup{labelsep=space} 
+\renewcommand{\thetable}{\arabic{section}-\arabic{table}}
+\renewcommand{\thealgorithm}{\arabic{section}-\arabic{algorithm}} 
+\makeatletter
+\renewcommand{\ALG@name}{算法} % change title prefix in algorithm environment
+\makeatother
+\captionsetup{labelsep=space}
 
 
 % title text
@@ -90,23 +94,22 @@
 \pagestyle{fancy}
 
 \makeatletter
-\newcommand{\if@sectionstar}[2]{ % are we in a \section* or \section?
+\newcommand{\if@sectionstar}[2]{ % check whether we are in a \section* or \section
 	\ifnum\value{@instarsection}=0
 		{#1}
 	\else
 		{#2}
 	\fi
 }
-
-
-\renewcommand{\sectionmark}[1]{\markboth{\if@sectionstar{第\chinese{section}章~}{}#1}{}}
+\renewcommand{\sectionmark}[1]{\markboth{\if@sectionstar{第\chinese{section}章~}{}#1}{}} % only add prefix "第x章" in header for sections without star (i.e. \section*).
 \makeatother
+
 \fancyhead[L]{\song{\zihao{-5}\mytitle}}
 \fancyhead[R]{\song{\zihao{-5}\leftmark}}
 \renewcommand\headrulewidth{.5pt}
 \renewcommand\footrulewidth{0pt}
 
-% for hype-reference of "section*" to work properly
+% for hyper-reference of "section*" to work properly
 \usepackage{xparse}
 \let\oldsection\section
 \makeatletter
@@ -119,17 +122,12 @@
      \setcounter{@instarsection}{1} % mark that we are in a \section*. See \if@sectionstar.
      \oldsection{#3}% \section*
      \setcounter{secnumdepth}{\value{@secnumdepth}}}% Restore secnumdepth
-    {\setcounter{@instarsection}{0} % mark that we are in a \section
+    {\setcounter{@instarsection}{0} % mark that we are in a \section. See \if@sectionstar.
      \IfValueTF{#2}% \section
        {\oldsection[#2]{#3}}% \section[.]{..}
        {\oldsection{#3}} % \section{..}
     }
 }
-\makeatother
-
-\makeatletter
-\renewcommand{\ALG@name}{算法}
-\renewcommand\thealgorithm{\arabic{section}-\arabic{algorithm}} 
 \makeatother
 
 % use GB/T 7714—2015 BibTeX Style
@@ -146,5 +144,5 @@
   leftmargin=*
 }
 
-%set the separate spacing for bibs
+% set the separate spacing for bibs
 \setlength{\bibsep}{0pt}
