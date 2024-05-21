@@ -146,3 +146,8 @@
 
 % set the separate spacing for bibs
 \setlength{\bibsep}{0pt}
+
+% set the font size in tables
+\DeclareCaptionFont{tablefont}{\zihao{5}}
+\captionsetup[table]{font=tablefont}
+\AtBeginEnvironment{tabular}{\zihao{5}}
