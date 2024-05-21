@@ -26,6 +26,7 @@
 \usepackage{amsmath,amssymb} % for mathematical symbols
 \usepackage{algorithm} % for algorithm environment
 \usepackage{algpseudocode} % for algorithm pseudocodes
+\usepackage{etoolbox} % for setups in environments
 
 % numbering restarts at each section
 \numberwithin{figure}{section}  
@@ -146,3 +147,8 @@
 
 % set the separate spacing for bibs
 \setlength{\bibsep}{0pt}
+
+% set the font size in tables
+\DeclareCaptionFont{tablefont}{\zihao{5}}
+\captionsetup[table]{font=tablefont}
+\AtBeginEnvironment{tabular}{\zihao{5}}
